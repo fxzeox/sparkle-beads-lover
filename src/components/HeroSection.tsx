@@ -1,14 +1,20 @@
 'use client';
 
 import HeroCarousel from './HeroCarousel';
+import { Product } from '@/types';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  products: Product[];
+  loading: boolean;
+}
+
+export default function HeroSection({ products, loading }: HeroSectionProps) {
   return (
     <section id="home" className="relative py-5 sm:py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/50 to-white">
       <div className="max-w-7xl mx-auto">
         {/* Carousel */}
         <div className="mb-7 sm:mb-10 animate-fade-in">
-          <HeroCarousel />
+          <HeroCarousel products={products} loading={loading} />
         </div>
 
         {/* Content Below Carousel */}
@@ -20,7 +26,7 @@ export default function HeroSection() {
             Artisan-crafted jewelry designed for those who appreciate quality, style, and uniqueness. Each bracelet tells a story.
           </p>
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/923250322467"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-blue-700 to-amber-500 text-white text-sm font-semibold transition-all hover:shadow-lg hover:scale-105 active:scale-95"

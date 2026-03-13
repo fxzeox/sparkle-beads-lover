@@ -4,6 +4,8 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 
+const DESCRIPTION_WORD_LIMIT = 12;
+
 interface ProductFormProps {
   onSuccess: () => void;
   onCancel: () => void;
@@ -23,7 +25,7 @@ export default function ProductForm({ onSuccess, onCancel, initialData, adminTok
     name: initialData?.name || '',
     price: initialData?.price || '',
     description: initialData?.description || '',
-    whatsapp: initialData?.whatsapp || 'https://www.tiktok.com/@sparklebeat',
+    whatsapp: initialData?.whatsapp || 'https://www.tiktok.com/@sparklebeads35?_r=1&_t=ZS-94Hlo4aMPEw',
     image: initialData?.image || '',
   });
 
@@ -33,8 +35,25 @@ export default function ProductForm({ onSuccess, onCancel, initialData, adminTok
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const descriptionWordCount = formData.description
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
+    if (name === 'description') {
+      const nextWordCount = value.trim().split(/\s+/).filter(Boolean).length;
+
+      if (nextWordCount > DESCRIPTION_WORD_LIMIT) {
+        return;
+      }
+
+      setFormData((prev) => ({ ...prev, description: value }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -84,10 +103,14 @@ export default function ProductForm({ onSuccess, onCancel, initialData, adminTok
         throw new Error('Please fill in all required fields');
       }
 
+      if (descriptionWordCount > DESCRIPTION_WORD_LIMIT) {
+        throw new Error(`Description must be ${DESCRIPTION_WORD_LIMIT} words or fewer`);
+      }
+
       const payload = {
         name: formData.name,
         price: parseInt(formData.price),
-        description: formData.description,
+        description: formData.description.trim(),
         image: formData.image,
         whatsapp: formData.whatsapp.trim(),
       };
@@ -171,7 +194,10 @@ export default function ProductForm({ onSuccess, onCancel, initialData, adminTok
 
           <div className="space-y-1">
             <label htmlFor="description" className="block text-xs font-semibold text-gray-600">Description</label>
-            <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows={3} className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+            <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows={3} placeholder="Short description for mobile cards" className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+            <p className="text-[11px] text-gray-500">
+              Keep it short for mobile: {descriptionWordCount}/{DESCRIPTION_WORD_LIMIT} words, about 2 lines
+            </p>
           </div>
 
           <div className="flex gap-3 pt-3 border-t border-amber-50">

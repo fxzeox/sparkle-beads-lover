@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const tiktokLink =
     product.whatsapp?.startsWith('http')
       ? product.whatsapp
-      : 'https://www.tiktok.com/@sparklebeat';
+      : 'https://www.tiktok.com/@sparklebeads35?_r=1&_t=ZS-94Hlo4aMPEw';
   const [showModal, setShowModal] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [modalImageLoaded, setModalImageLoaded] = useState(false);
@@ -41,9 +41,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   }, [showModal]);
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-amber-100/80">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-amber-100/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       {/* Image Container */}
-      <div className="relative h-36 sm:h-40 w-full overflow-hidden bg-gray-100 cursor-zoom-in" onClick={() => setShowModal(true)}>
+      <div className="relative h-32 sm:h-36 w-full overflow-hidden bg-gray-100 cursor-zoom-in" onClick={() => setShowModal(true)}>
         {!imageError ? (
           <Image
             src={product.image}
@@ -67,47 +67,44 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Content Container */}
-      <div className="space-y-2.5 p-4 sm:p-5">
+      <div className="flex flex-1 flex-col gap-1.5 p-3 sm:p-4">
         {/* Product Name */}
-        <h3 className="line-clamp-2 text-sm sm:text-base font-bold text-gray-800 group-hover:text-amber-600 transition-colors">
+        <h3 className="line-clamp-2 text-sm sm:text-base font-bold leading-tight text-gray-800 transition-colors group-hover:text-amber-600">
           {product.name}
         </h3>
 
         {/* Description */}
         {product.description && (
-          <p className="line-clamp-2 text-xs sm:text-sm text-gray-500">
+          <p className="line-clamp-2 text-[11px] sm:text-sm leading-snug text-gray-500">
             {product.description}
           </p>
         )}
 
         {/* Price */}
-        <div className="pt-1">
-          <span className="text-base sm:text-lg font-bold text-amber-500">
+        <div>
+          <span className="text-base font-bold text-amber-500 sm:text-lg">
             Rs {product.price.toLocaleString()}
           </span>
         </div>
 
-        {/* TikTok Button */}
-        <Link
-          href={tiktokLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full rounded-full bg-gradient-to-r from-blue-700 to-amber-500 py-2.5 px-4 text-center font-semibold text-white text-xs transition-all duration-300 hover:shadow-md hover:scale-105 active:scale-95 mt-3"
-        >
-          <span className="flex items-center justify-center gap-2">
-            <svg
-              className="h-5 w-5"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.445 0-2.816-.356-4.038-1.03L2.504 3.87l1.143 3.776C2.596 9.267 2.154 10.703 2.154 12.133c0 3.663 2.905 6.648 6.477 6.648 1.735 0 3.367-.675 4.589-1.897 1.222-1.223 1.894-2.854 1.894-4.589 0-3.573-2.905-6.648-6.477-6.648" />
+        <div className="flex items-center justify-center gap-1 pt-0.5">
+          <p className="text-center text-[10px] leading-tight text-gray-500 sm:text-[11px]">
+            More details on TikTok
+          </p>
+          <Link
+            href={tiktokLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open TikTok"
+            className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] bg-[#101010] shadow-sm transition-transform duration-200 hover:scale-105"
+          >
+            <svg className="h-3 w-3" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#25F4EE" d="M14.4 5.1v8.4a2.3 2.3 0 1 1-1.7-2.2V9.2a4.7 4.7 0 1 0 3.9 4.6V8.7a6.6 6.6 0 0 0 3.4 1V7.5a4.1 4.1 0 0 1-2.6-1.1 4.6 4.6 0 0 1-1-1.3h-2Z"/>
+              <path fill="#FE2C55" d="M13.8 4.5v8.4a2.3 2.3 0 1 1-1.7-2.2V8.6a4.7 4.7 0 1 0 3.9 4.6V8.1a6.6 6.6 0 0 0 3.4 1V6.9a4.1 4.1 0 0 1-2.6-1.1 4.6 4.6 0 0 1-1-1.3h-2Z"/>
+              <path fill="#fff" d="M14.1 4.8v8.4a2.3 2.3 0 1 1-1.7-2.2V8.9a4.7 4.7 0 1 0 3.9 4.6V8.4a6.6 6.6 0 0 0 3.4 1V7.2a4.1 4.1 0 0 1-2.6-1.1 4.6 4.6 0 0 1-1-1.3h-2Z"/>
             </svg>
-            See More on TikTok
-          </span>
-        </Link>
-        <p className="text-[11px] text-center text-gray-500">
-          For more detail of this item, click on TikTok.
-        </p>
+          </Link>
+        </div>
       </div>
 
       {/* Image Modal */}

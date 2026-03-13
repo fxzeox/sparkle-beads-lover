@@ -72,7 +72,7 @@ npm install
 
 ### 5. Configure Environment Variables
 
-Update the `.env.local` file in the root directory with your credentials:
+Copy `.env.example` to `.env.local` and replace the placeholder values with your credentials:
 
 ```env
 # MongoDB
@@ -178,6 +178,13 @@ Body: { /* updated fields */ }
 
 ## 🌐 Deployment to Vercel
 
+### Before You Deploy
+
+1. Copy `.env.example` to `.env.local` for local testing.
+2. Confirm `npm run build` works locally.
+3. Make sure your MongoDB Atlas IP/network settings allow Vercel to connect.
+4. Make sure your Cloudinary upload preset is valid.
+
 ### Option 1: Using Vercel CLI
 
 ```bash
@@ -190,15 +197,38 @@ vercel --prod
 1. Push code to GitHub repository
 2. Go to [Vercel](https://vercel.com)
 3. Import your GitHub repo
-4. Add environment variables from `.env.local`
-5. Deploy!
+4. Framework preset: `Next.js`
+5. Add all environment variables from `.env.example`
+6. Deploy
 
 ### Post-Deployment
 
 After deployment, add environment variables in Vercel:
 1. Go to Project Settings → Environment Variables
-2. Add all variables from your `.env.local`
-3. Redeploy for changes to take effect
+2. Add all variables from `.env.example`
+3. Use the same values for `Production`, `Preview`, and `Development` if needed
+4. Redeploy for changes to take effect
+
+### Required Vercel Environment Variables
+
+```env
+MONGODB_URI=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
+ADMIN_PASSWORD=
+NEXT_PUBLIC_ADMIN_EMAIL=
+NEXT_PUBLIC_ADMIN_PASSWORD=
+```
+
+### Vercel Notes
+
+- No custom `vercel.json` is required for this project.
+- Keep the repository private if you want; Vercel supports private repos.
+- Do not commit `.env.local`.
+- If product images do not load after deploy, verify `res.cloudinary.com` is still allowed in `next.config.ts`.
 
 ## 🎨 Customization
 

@@ -63,7 +63,7 @@ export default function AboutSection() {
 
             <div className="pt-2">
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/923250322467"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-6 sm:px-8 py-2.5 rounded-full bg-gradient-to-r from-blue-700 to-amber-500 text-white text-sm font-semibold transition-all hover:shadow-md hover:scale-105 active:scale-95"

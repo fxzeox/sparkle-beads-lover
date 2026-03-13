@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      <HeroSection />
+      <HeroSection products={products} loading={loading} />
 
       {/* Products Section */}
       <section id="products" className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/35 to-white">
@@ -66,7 +66,7 @@ export default function Home() {
               <p className="text-sm mt-2">Check back soon for new bracelets!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-7">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5 lg:gap-6">
               {products.map((product) => (
                 <div key={product._id} className="animate-slide-up">
                   <ProductCard product={product} />

@@ -48,8 +48,8 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0 mt-0.5">📱</span>
-                  <a href="tel:+1234567890" className="text-gray-400 hover:text-white transition text-sm font-medium">
-                    +1 (234) 567-890
+                  <a href="tel:+923250322467" className="text-gray-400 hover:text-white transition text-sm font-medium">
+                    +92 325 0322467
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
@@ -66,7 +66,7 @@ export default function Footer() {
               <h4 className="text-base font-semibold mb-4 text-sky-300">Follow Us</h4>
               <div className="flex flex-col gap-3">
                 <a
-                  href="https://www.tiktok.com/@sparklebeat"
+                  href="https://www.tiktok.com/@sparklebeads35?_r=1&_t=ZS-94Hlo4aMPEw"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
@@ -84,7 +84,7 @@ export default function Footer() {
                   <span>Instagram</span>
                 </a>
                 <a
-                  href="https://wa.me/1234567890"
+                  href="https://wa.me/923250322467"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
