@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { SiTiktok } from 'react-icons/si';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -55,7 +57,7 @@ export default function Footer() {
                 <li className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0 mt-0.5">📧</span>
                   <a href="mailto:info@sparklebeat.com" className="text-gray-400 hover:text-white transition text-sm font-medium">
-                    info@sparklebeat.com
+                    sparklebeat@gmail.com
                   </a>
                 </li>
               </ul>
@@ -71,7 +73,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
                 >
-                  <span>🎵</span>
+                  <SiTiktok className="text-lg" aria-hidden="true" />
                   <span>TikTok</span>
                 </a>
                 <a
@@ -80,7 +82,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
                 >
-                  <span>📸</span>
+                  <FaInstagram className="text-lg" aria-hidden="true" />
                   <span>Instagram</span>
                 </a>
                 <a
@@ -89,7 +91,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
                 >
-                  <span>💬</span>
+                  <FaWhatsapp className="text-lg" aria-hidden="true" />
                   <span>WhatsApp</span>
                 </a>
               </div>

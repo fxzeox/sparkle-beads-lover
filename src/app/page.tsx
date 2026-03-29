@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { FaWhatsapp } from 'react-icons/fa';
 import ProductCard from '@/components/ProductCard';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -79,6 +80,16 @@ export default function Home() {
 
       <AboutSection />
       <Footer />
+
+      <a
+        href="https://wa.me/923250322467?text=Hi%20Sparkle%20Beads%20Lover%2C%20I%20want%20to%20order%20a%20bracelet."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl animate-bounce"
+      >
+        <FaWhatsapp className="text-3xl" aria-hidden="true" />
+      </a>
 
       <style>{`
         @keyframes slideUp {
