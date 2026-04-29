@@ -26,7 +26,7 @@ export default function HeroSection({ products, loading }: HeroSectionProps) {
             Artisan-crafted jewelry designed for those who appreciate quality, style, and uniqueness. Each bracelet tells a story.
           </p>
           <a
-            href="https://wa.me/923250322467"
+            href="https://wa.me/923016555942"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-blue-700 to-amber-500 text-white text-sm font-semibold transition-all hover:shadow-lg hover:scale-105 active:scale-95"

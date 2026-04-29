@@ -82,7 +82,7 @@ export default function Home() {
       <Footer />
 
       <a
-        href="https://wa.me/923250322467?text=Hi%20Sparkle%20Beads%20Lover%2C%20I%20want%20to%20order%20a%20bracelet."
+        href="https://wa.me/923016555942?text=Hi%20Sparkle%20Beads%20Lover%2C%20I%20want%20to%20order%20a%20bracelet."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
