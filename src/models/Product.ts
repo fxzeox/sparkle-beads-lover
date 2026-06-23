@@ -1,7 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-const DESCRIPTION_WORD_LIMIT = 12;
-
 export interface IProduct extends Document {
   name: string;
   price: number;
@@ -35,13 +33,6 @@ const productSchema = new Schema(
     description: {
       type: String,
       trim: true,
-      validate: {
-        validator: (value: string | undefined) => {
-          if (!value) return true;
-          return value.split(/\s+/).filter(Boolean).length <= DESCRIPTION_WORD_LIMIT;
-        },
-        message: `Description must be ${DESCRIPTION_WORD_LIMIT} words or fewer`,
-      },
     },
   },
   {

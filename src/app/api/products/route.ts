@@ -1,15 +1,24 @@
 import { connectToDatabase } from '@/lib/mongodb';
-import Product, { IProduct } from '@/models/Product';
+import { normalizeProductDescription } from '@/lib/productDescription';
+import Product from '@/models/Product';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   try {
     await connectToDatabase();
-    const products = await Product.find({}).sort({ createdAt: -1 });
-    return NextResponse.json(products, { status: 200 });
-  } catch (error: any) {
+    const products = await Product.find({}).sort({ createdAt: -1 }).lean();
+    const normalizedProducts = products.map((product) => ({
+      ...product,
+      description: normalizeProductDescription(product.description, product.name, product.price),
+    }));
+
+    return NextResponse.json(normalizedProducts, { status: 200 });
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: 'Error fetching products', error: error.message },
+      {
+        message: 'Error fetching products',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
@@ -36,14 +45,17 @@ export async function POST(request: NextRequest) {
       price: body.price,
       image: body.image,
       whatsapp: body.whatsapp,
-      description: body.description,
+      description: normalizeProductDescription(body.description, body.name, body.price),
     });
 
     await product.save();
     return NextResponse.json(product, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: 'Error creating product', error: error.message },
+      {
+        message: 'Error creating product',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
@@ -78,9 +90,12 @@ export async function DELETE(request: NextRequest) {
       { message: 'Product deleted successfully' },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: 'Error deleting product', error: error.message },
+      {
+        message: 'Error deleting product',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
@@ -111,15 +126,23 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const product = await Product.findByIdAndUpdate(id, body, {
+    const payload = {
+      ...body,
+      description: normalizeProductDescription(body.description, body.name, body.price),
+    };
+
+    const product = await Product.findByIdAndUpdate(id, payload, {
       new: true,
       runValidators: true,
     });
 
     return NextResponse.json(product, { status: 200 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { message: 'Error updating product', error: error.message },
+      {
+        message: 'Error updating product',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }

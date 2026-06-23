@@ -24,12 +24,7 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
     title: product.name,
     description: product.description || 'Handcrafted bracelet collection',
   }));
-
-  useEffect(() => {
-    if (currentSlide >= slides.length) {
-      setCurrentSlide(0);
-    }
-  }, [currentSlide, slides.length]);
+  const activeSlide = slides.length > 0 ? currentSlide % slides.length : 0;
 
   // Auto-play carousel
   useEffect(() => {
@@ -56,9 +51,10 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
 
   if (loading) {
     return (
-      <div className="relative h-52 w-full overflow-hidden rounded-2xl bg-gradient-to-r from-amber-100 via-white to-blue-100 shadow-xl sm:h-72 md:h-[360px] lg:h-[420px]">
+      <div className="relative h-[420px] w-full overflow-hidden rounded-[34px] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(242,248,255,0.88),rgba(252,245,231,0.88))] shadow-[0_28px_70px_rgba(25,48,78,0.18)] sm:h-[500px] lg:h-[620px]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(108,166,221,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(216,177,91,0.24),transparent_22%)]" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-amber-300 border-t-amber-500" />
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#d8b15b]/25 border-t-[#d8b15b]" />
         </div>
       </div>
     );
@@ -66,11 +62,12 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
 
   if (slides.length === 0) {
     return (
-      <div className="relative h-52 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-blue-950 to-amber-700 shadow-xl sm:h-72 md:h-[360px] lg:h-[420px]">
-        <div className="absolute inset-0 bg-black/20" />
+      <div className="relative h-[420px] w-full overflow-hidden rounded-[34px] bg-[linear-gradient(145deg,#1d3558,#2b5c8b,#d8b15b)] shadow-[0_28px_70px_rgba(25,48,78,0.22)] sm:h-[500px] lg:h-[620px]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_30%)]" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <h3 className="text-xl font-bold sm:text-2xl">Featured Bracelets</h3>
-          <p className="mt-2 max-w-md text-sm text-white/80 sm:text-base">
+          <p className="mb-4 text-[0.72rem] font-semibold uppercase tracking-[0.42em] text-white/70">Coming Soon</p>
+          <h3 className="font-display text-4xl font-semibold sm:text-5xl">Featured Bracelets</h3>
+          <p className="mt-3 max-w-md text-sm leading-7 text-white/78 sm:text-base">
             Add product images and they will appear here automatically.
           </p>
         </div>
@@ -79,8 +76,7 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
   }
 
   return (
-    <div className="relative w-full h-52 sm:h-72 md:h-[360px] lg:h-[420px] rounded-2xl overflow-hidden bg-black shadow-xl">
-      {/* Slides */}
+    <div className="relative h-[420px] w-full overflow-hidden rounded-[34px] bg-slate-950 shadow-[0_28px_70px_rgba(25,48,78,0.22)] sm:h-[500px] lg:h-[620px]">
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (
           <div
@@ -92,63 +88,71 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              className="animate-slow-zoom h-full w-full object-cover"
               onError={(e) => {
-                // Fallback to gradient if image fails to load
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
               }}
             />
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,19,35,0.12),rgba(9,19,35,0.28)_35%,rgba(9,19,35,0.78)_100%)]" />
           </div>
         ))}
       </div>
 
-      {/* Navigation Buttons */}
+      <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-7">
+        <div className="max-w-lg rounded-[30px] bg-white/14 p-5 shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:p-6">
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-white/65">
+            Signature Piece
+          </p>
+          <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
+            {slides[activeSlide]?.title}
+          </h3>
+          <p className="mt-3 max-w-md text-sm leading-7 text-white/80 sm:text-base">
+            {slides[activeSlide]?.description}
+          </p>
+        </div>
+      </div>
+
       {slides.length > 1 && (
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/30 p-2 transition-all duration-300 backdrop-blur-sm hover:bg-white/50 md:p-3"
+            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/18 p-3 text-white shadow-[0_16px_36px_rgba(0,0,0,0.18)] transition-all duration-300 backdrop-blur-md hover:bg-white/28 sm:left-6 md:p-4"
             aria-label="Previous slide"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/30 p-2 transition-all duration-300 backdrop-blur-sm hover:bg-white/50 md:p-3"
+            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/18 p-3 text-white shadow-[0_16px_36px_rgba(0,0,0,0.18)] transition-all duration-300 backdrop-blur-md hover:bg-white/28 sm:right-6 md:p-4"
             aria-label="Next slide"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </>
       )}
 
-      {/* Dots Indicator */}
       {slides.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+        <div className="absolute bottom-5 right-5 z-20 flex gap-2 sm:bottom-7 sm:right-7">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={`rounded-full transition-all duration-300 ${
-                index === currentSlide
-                  ? 'bg-white w-8 h-2.5'
-                  : 'bg-white/50 hover:bg-white/75 w-2.5 h-2.5'
+                index === activeSlide
+                  ? 'h-2.5 w-8 bg-white'
+                  : 'h-2.5 w-2.5 bg-white/50 hover:bg-white/75'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       )}
-
     </div>
   );
 }

@@ -25,51 +25,60 @@ export default function Home() {
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
       setProducts(data);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load products');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to load products');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen overflow-x-hidden bg-transparent text-slate-900">
       <Navbar />
       <HeroSection products={products} loading={loading} />
 
-      {/* Products Section */}
-      <section id="products" className="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/35 to-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-10">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 bg-gradient-to-r from-blue-700 to-amber-500 bg-clip-text text-transparent">
+      <section
+        id="products"
+        className="relative px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-16 lg:px-8 lg:pb-24 lg:pt-20"
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-8 h-48 bg-[radial-gradient(circle_at_center,rgba(108,166,221,0.12),transparent_65%)]" />
+        <div className="mx-auto max-w-[1280px]">
+          <div className="mb-10 text-center sm:mb-12">
+            <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[0.42em] text-slate-500">
+              Curated Collection
+            </p>
+            <h2 className="font-display text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Featured Collection
             </h2>
-            <p className="text-sm sm:text-base text-gray-500 max-w-xl mx-auto">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
               Discover our handcrafted bracelets, each piece designed with elegance and care
             </p>
           </div>
 
-          {/* Products Grid */}
           {loading ? (
-            <div className="flex items-center justify-center min-h-96">
-              <div className="animate-spin">
-                <div className="w-12 h-12 border-4 border-amber-200 border-t-amber-500 rounded-full" />
+            <div className="flex min-h-96 items-center justify-center">
+              <div className="rounded-[32px] bg-white/75 px-10 py-12 shadow-[0_22px_60px_rgba(28,54,86,0.12)] backdrop-blur">
+                <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-[#d8b15b]/25 border-t-[#d8b15b]" />
               </div>
             </div>
           ) : error ? (
-            <div className="rounded-lg bg-red-50 p-6 text-center text-red-800">
-              <p className="font-semibold">Unable to load products</p>
-              <p className="text-sm mt-2">{error}</p>
+            <div className="mx-auto max-w-2xl rounded-[32px] bg-white/85 p-8 text-center shadow-[0_22px_60px_rgba(28,54,86,0.12)] backdrop-blur">
+              <p className="text-lg font-semibold text-red-800">Unable to load products</p>
+              <p className="mt-2 text-sm text-red-700">{error}</p>
             </div>
           ) : products.length === 0 ? (
-            <div className="rounded-lg bg-amber-50 p-6 text-center text-amber-800">
-              <p className="font-semibold">No products available yet</p>
-              <p className="text-sm mt-2">Check back soon for new bracelets!</p>
+            <div className="mx-auto max-w-2xl rounded-[32px] bg-white/85 p-8 text-center shadow-[0_22px_60px_rgba(28,54,86,0.12)] backdrop-blur">
+              <p className="font-display text-3xl font-semibold text-slate-900">No products available yet</p>
+              <p className="mt-3 text-sm text-slate-600">Check back soon for new bracelets!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5 lg:gap-6">
-              {products.map((product) => (
-                <div key={product._id} className="animate-slide-up">
+            <div className="grid grid-cols-1 gap-5 min-[430px]:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((product, index) => (
+                <div
+                  key={product._id}
+                  className="animate-fade-up"
+                  style={{ animationDelay: `${index * 70}ms` }}
+                >
                   <ProductCard product={product} />
                 </div>
               ))}
@@ -86,27 +95,10 @@ export default function Home() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
-        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl animate-bounce"
+        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[linear-gradient(135deg,#36d46f,#1eb85b)] text-white shadow-[0_20px_40px_rgba(37,211,102,0.38)] transition-all duration-300 hover:scale-110 hover:shadow-[0_24px_48px_rgba(37,211,102,0.46)] animate-float-gentle"
       >
         <FaWhatsapp className="text-3xl" aria-hidden="true" />
       </a>
-
-      <style>{`
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-slide-up {
-          animation: slideUp 0.6s ease-out;
-        }
-      `}</style>
     </main>
   );
 }

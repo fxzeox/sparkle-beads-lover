@@ -2,7 +2,6 @@
 
 import { Product } from '@/types';
 import Image from 'next/image';
-import Link from 'next/link';
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
 
@@ -11,18 +10,13 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const tiktokLink =
-    product.whatsapp?.startsWith('http')
-      ? product.whatsapp
-      : 'https://www.tiktok.com/@sparklebeads35?_r=1&_t=ZS-94Hlo4aMPEw';
   const [showModal, setShowModal] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [modalImageLoaded, setModalImageLoaded] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const canPortal = typeof document !== 'undefined';
+  const modalDescription =
+    product.description?.trim() ||
+    'A handcrafted piece designed with care for a graceful, elegant look.';
 
   useEffect(() => {
     // Prevent background scroll to avoid visual jump/flicker when modal opens.
@@ -34,119 +28,114 @@ export default function ProductCard({ product }: ProductCardProps) {
     };
   }, [showModal]);
 
-  useEffect(() => {
-    if (showModal) {
-      setModalImageLoaded(false);
-    }
-  }, [showModal]);
-
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-amber-100/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-      {/* Image Container */}
-      <div className="relative h-32 sm:h-36 w-full overflow-hidden bg-gray-100 cursor-zoom-in" onClick={() => setShowModal(true)}>
+    <div className="group relative mx-auto flex w-full max-w-[320px] flex-col overflow-hidden rounded-[30px] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,243,236,0.95))] shadow-[0_20px_48px_rgba(28,54,86,0.12)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_26px_58px_rgba(28,54,86,0.18)]">
+      <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-[#d8b15b]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-4 bottom-8 h-20 w-20 rounded-full bg-[#6ca6dd]/12 blur-3xl" />
+
+      <div
+        className="relative h-44 w-full cursor-zoom-in overflow-hidden bg-slate-100 sm:h-52"
+        onClick={() => {
+          setModalImageLoaded(false);
+          setShowModal(true);
+        }}
+      >
         {!imageError ? (
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
             onError={() => setImageError(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl">💎</div>
+          <div className="flex h-full w-full items-center justify-center text-4xl">💎</div>
         )}
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        
-        {/* Sale Badge */}
-        <div className="absolute top-2 right-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-white px-2.5 py-1 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          New
-        </div>
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(15,26,45,0.18)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
-      {/* Content Container */}
-      <div className="flex flex-1 flex-col gap-1.5 p-3 sm:p-4">
-        {/* Product Name */}
-        <h3 className="line-clamp-2 text-sm sm:text-base font-bold leading-tight text-gray-800 transition-colors group-hover:text-amber-600">
-          {product.name}
-        </h3>
-
-        {/* Description */}
-        {product.description && (
-          <p className="line-clamp-2 text-[11px] sm:text-sm leading-snug text-gray-500">
-            {product.description}
-          </p>
-        )}
-
-        {/* Price */}
+      <div className="flex flex-col gap-2 p-4 sm:gap-2.5 sm:p-5">
         <div>
-          <span className="text-base font-bold text-amber-500 sm:text-lg">
-            Rs {product.price.toLocaleString()}
-          </span>
+          <h3 className="font-display text-[1.28rem] font-semibold leading-[1.2] break-words text-slate-900 transition-colors group-hover:text-[#1f4f88] sm:text-[1.5rem]">
+            {product.name}
+          </h3>
         </div>
 
-        <div className="flex items-center justify-center gap-1 pt-0.5">
-          <p className="text-center text-[10px] leading-tight text-gray-500 sm:text-[11px]">
-            More details on TikTok
-          </p>
-          <Link
-            href={tiktokLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open TikTok"
-            className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] bg-[#101010] shadow-sm transition-transform duration-200 hover:scale-105"
-          >
-            <svg className="h-3 w-3" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#25F4EE" d="M14.4 5.1v8.4a2.3 2.3 0 1 1-1.7-2.2V9.2a4.7 4.7 0 1 0 3.9 4.6V8.7a6.6 6.6 0 0 0 3.4 1V7.5a4.1 4.1 0 0 1-2.6-1.1 4.6 4.6 0 0 1-1-1.3h-2Z"/>
-              <path fill="#FE2C55" d="M13.8 4.5v8.4a2.3 2.3 0 1 1-1.7-2.2V8.6a4.7 4.7 0 1 0 3.9 4.6V8.1a6.6 6.6 0 0 0 3.4 1V6.9a4.1 4.1 0 0 1-2.6-1.1 4.6 4.6 0 0 1-1-1.3h-2Z"/>
-              <path fill="#fff" d="M14.1 4.8v8.4a2.3 2.3 0 1 1-1.7-2.2V8.9a4.7 4.7 0 1 0 3.9 4.6V8.4a6.6 6.6 0 0 0 3.4 1V7.2a4.1 4.1 0 0 1-2.6-1.1 4.6 4.6 0 0 1-1-1.3h-2Z"/>
-            </svg>
-          </Link>
+        <div className="flex items-end justify-between gap-2 pt-0.5">
+          <div>
+            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-slate-500">Price</p>
+            <span className="mt-1 block font-display text-[1.85rem] font-semibold text-[#c4953d] sm:text-[2rem]">
+              Rs {product.price.toLocaleString()}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Image Modal */}
-      {isMounted &&
+      {canPortal &&
         showModal &&
         createPortal(
           <div
-            className="fixed inset-0 bg-black/85 z-[100] flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 p-4 backdrop-blur-md"
             onClick={() => setShowModal(false)}
           >
             <div
-              className="relative flex items-center justify-center max-w-4xl w-full max-h-[90vh]"
+              className="relative w-full max-w-4xl overflow-hidden rounded-[30px] bg-white shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {!modalImageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-amber-200 border-t-amber-500" />
+              <div className="grid max-h-[90vh] grid-cols-1 md:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
+                <div className="relative flex min-h-[260px] items-center justify-center bg-[#f7f3eb] p-4 sm:min-h-[320px] sm:p-6">
+                  {!modalImageLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#d8b15b]/25 border-t-[#d8b15b]" />
+                    </div>
+                  )}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    draggable={false}
+                    className={`max-h-[42vh] max-w-full cursor-zoom-out rounded-[24px] object-contain shadow-xl select-none transition-opacity duration-200 sm:max-h-[48vh] md:max-h-[72vh] ${
+                      modalImageLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoad={() => setModalImageLoaded(true)}
+                    onError={() => {
+                      setImageError(true);
+                      setModalImageLoaded(true);
+                    }}
+                  />
                 </div>
-              )}
-              <img
-                src={product.image}
-                alt={product.name}
-                draggable={false}
-                className={`max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl cursor-zoom-out select-none transition-opacity duration-200 ${
-                  modalImageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-                onLoad={() => setModalImageLoaded(true)}
-                onError={() => {
-                  setImageError(true);
-                  setModalImageLoaded(true);
-                }}
-              />
+                <div className="flex max-h-[48vh] flex-col gap-5 overflow-y-auto p-5 sm:max-h-[42vh] sm:p-7 md:max-h-[90vh]">
+                  <div>
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-slate-500">
+                      Product Details
+                    </p>
+                    <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+                      {product.name}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+                      {modalDescription}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-slate-500">Price</p>
+                    <p className="mt-1 font-display text-4xl font-semibold text-[#c4953d] sm:text-5xl">
+                      Rs {product.price.toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowModal(false);
                 }}
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 p-2.5 bg-white hover:bg-gray-200 rounded-full transition-all shadow-lg"
+                className="absolute right-3 top-3 rounded-full bg-white p-2.5 shadow-lg transition-all hover:bg-gray-200 sm:right-4 sm:top-4"
                 title="Close"
                 aria-label="Close image"
               >
-                <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-6 w-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>

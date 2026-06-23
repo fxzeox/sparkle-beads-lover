@@ -6,81 +6,81 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white">
-      {/* Main Footer */}
-      <div className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-8 sm:mb-10">
-            {/* Brand */}
+    <footer
+      id="contact"
+      className="relative overflow-hidden bg-[linear-gradient(145deg,#10203a,#18375f,#0f1c31)] text-white"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(108,166,221,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(216,177,91,0.16),transparent_24%)]" />
+      <div className="relative px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div className="mx-auto max-w-[1380px]">
+          <div className="mb-10 grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr]">
             <div>
-              <h3 className="text-lg font-bold mb-4 bg-gradient-to-r from-sky-300 to-amber-300 bg-clip-text text-transparent">Sparkle Beads Lover</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">Handcrafted bracelets made with passion and premium materials. Each piece is unique and designed to complement your personal style.</p>
+              <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[0.4em] text-white/55">Sparkle Beads Lover</p>
+              <h3 className="font-display text-5xl font-semibold leading-none text-white sm:text-6xl">Handcrafted sparkle, styled softly.</h3>
+              <p className="mt-5 max-w-md text-sm leading-7 text-white/72">Handcrafted bracelets made with passion and premium materials. Each piece is unique and designed to complement your personal style.</p>
             </div>
 
-            {/* Quick Links */}
             <div>
-              <h4 className="text-base font-semibold mb-4 text-sky-300">Quick Links</h4>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-[#d8b15b]">Quick Links</h4>
               <ul className="space-y-3">
                 <li>
-                  <Link href="#home" className="text-gray-400 hover:text-sky-300 transition text-sm font-medium">
+                  <Link href="#home" className="text-sm font-medium text-white/72 transition hover:text-white">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="#products" className="text-gray-400 hover:text-sky-300 transition text-sm font-medium">
+                  <Link href="#products" className="text-sm font-medium text-white/72 transition hover:text-white">
                     Products
                   </Link>
                 </li>
                 <li>
-                  <Link href="#about" className="text-gray-400 hover:text-sky-300 transition text-sm font-medium">
+                  <Link href="#about" className="text-sm font-medium text-white/72 transition hover:text-white">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="#contact" className="text-gray-400 hover:text-sky-300 transition text-sm font-medium">
+                  <Link href="#contact" className="text-sm font-medium text-white/72 transition hover:text-white">
                     Contact
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Contact Info */}
             <div>
-              <h4 className="text-base font-semibold mb-4 text-sky-300">Contact</h4>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-[#d8b15b]">Contact</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <span className="text-lg flex-shrink-0 mt-0.5">📱</span>
-                  <a href="tel:+923016555942" className="text-gray-400 hover:text-white transition text-sm font-medium">
+                  <span className="mt-0.5 flex-shrink-0 text-lg">📱</span>
+                  <a href="tel:+923016555942" className="text-sm font-medium text-white/72 transition hover:text-white">
                     +92 301 6555942
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lg flex-shrink-0 mt-0.5">📧</span>
-                  <a href="mailto:info@sparklebeat.com" className="text-gray-400 hover:text-white transition text-sm font-medium">
+                  <span className="mt-0.5 flex-shrink-0 text-lg">📧</span>
+                  <a href="mailto:info@sparklebeat.com" className="text-sm font-medium text-white/72 transition hover:text-white">
                     sparklebeat@gmail.com
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* Social Media */}
             <div>
-              <h4 className="text-base font-semibold mb-4 text-sky-300">Follow Us</h4>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-[#d8b15b]">Follow Us</h4>
               <div className="flex flex-col gap-3">
                 <a
                   href="https://www.tiktok.com/@sparklebeads35?_r=1&_t=ZS-94Hlo4aMPEw"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
+                  className="flex items-center gap-3 rounded-full bg-white/8 px-4 py-3 text-sm font-medium text-white/78 transition hover:bg-white/14 hover:text-white"
                 >
                   <SiTiktok className="text-lg" aria-hidden="true" />
                   <span>TikTok</span>
                 </a>
                 <a
-                  href="https://www.instagram.com/sparklebeat"
+                  href="https://www.instagram.com/sparklebeads35?igsh=MWc4NHpnMjduYnJ3YQ=="
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
+                  className="flex items-center gap-3 rounded-full bg-white/8 px-4 py-3 text-sm font-medium text-white/78 transition hover:bg-white/14 hover:text-white"
                 >
                   <FaInstagram className="text-lg" aria-hidden="true" />
                   <span>Instagram</span>
@@ -89,7 +89,7 @@ export default function Footer() {
                   href="https://wa.me/923016555942"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-white transition text-sm font-medium"
+                  className="flex items-center gap-3 rounded-full bg-white/8 px-4 py-3 text-sm font-medium text-white/78 transition hover:bg-white/14 hover:text-white"
                 >
                   <FaWhatsapp className="text-lg" aria-hidden="true" />
                   <span>WhatsApp</span>
@@ -98,10 +98,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <hr className="border-gray-700" />
+          <div className="h-px w-full bg-white/10" />
 
-          {/* Bottom Footer */}
-          <div className="mt-8 sm:mt-12 text-center text-gray-400 text-sm">
+          <div className="mt-8 text-center text-sm text-white/58 sm:mt-10">
             <p className="mb-1">© {currentYear} Sparkle Beads Lover. All rights reserved.</p>
             <p>Handcrafted bracelets with love ✨</p>
           </div>

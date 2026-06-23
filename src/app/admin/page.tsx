@@ -8,12 +8,21 @@ import { Product } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface EditableProduct {
+  _id: string;
+  name: string;
+  price: string;
+  description: string;
+  image: string;
+  whatsapp: string;
+}
+
 export default function AdminDashboard() {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<any>(null);
+  const [editingProduct, setEditingProduct] = useState<EditableProduct | null>(null);
   const [adminToken, setAdminToken] = useState('');
   const [error, setError] = useState('');
 
@@ -127,7 +136,7 @@ export default function AdminDashboard() {
               setShowForm(false);
               setEditingProduct(null);
             }}
-            initialData={editingProduct}
+            initialData={editingProduct ?? undefined}
           />
         )}
 
@@ -165,7 +174,6 @@ export default function AdminDashboard() {
                   <th className="px-4 py-3 text-left text-xs font-semibold">Image</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold">Name</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold">Price</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold">TikTok</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold">Actions</th>
                 </tr>
               </thead>
@@ -187,20 +195,6 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-4 py-3">
                       <p className="text-sm font-bold text-amber-500">Rs {product.price}</p>
-                    </td>
-                    <td className="px-4 py-3">
-                      {product.whatsapp?.startsWith('http') ? (
-                        <a
-                          href={product.whatsapp}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-semibold text-amber-700 hover:text-amber-800"
-                        >
-                          Open Link
-                        </a>
-                      ) : (
-                        <span className="text-xs text-gray-400">Not set</span>
-                      )}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
