@@ -72,7 +72,7 @@ export default function Home() {
               <p className="mt-3 text-sm text-slate-600">Check back soon for new bracelets!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-5 min-[430px]:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
               {products.map((product, index) => (
                 <div
                   key={product._id}

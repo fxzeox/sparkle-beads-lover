@@ -51,33 +51,33 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
 
   if (loading) {
     return (
-      <div className="relative h-[420px] w-full overflow-hidden rounded-[34px] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(242,248,255,0.88),rgba(252,245,231,0.88))] shadow-[0_28px_70px_rgba(25,48,78,0.18)] sm:h-[500px] lg:h-[620px]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(108,166,221,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(216,177,91,0.24),transparent_22%)]" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#d8b15b]/25 border-t-[#d8b15b]" />
-        </div>
+      <div className="relative h-[320px] w-full overflow-hidden bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(242,248,255,0.88),rgba(252,245,231,0.88))] shadow-[0_24px_60px_rgba(25,48,78,0.16)] sm:h-[420px] lg:h-[620px]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(108,166,221,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(216,177,91,0.24),transparent_22%)]" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#d8b15b]/25 border-t-[#d8b15b]" />
+          </div>
       </div>
     );
   }
 
   if (slides.length === 0) {
     return (
-      <div className="relative h-[420px] w-full overflow-hidden rounded-[34px] bg-[linear-gradient(145deg,#1d3558,#2b5c8b,#d8b15b)] shadow-[0_28px_70px_rgba(25,48,78,0.22)] sm:h-[500px] lg:h-[620px]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_30%)]" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <p className="mb-4 text-[0.72rem] font-semibold uppercase tracking-[0.42em] text-white/70">Coming Soon</p>
-          <h3 className="font-display text-4xl font-semibold sm:text-5xl">Featured Bracelets</h3>
-          <p className="mt-3 max-w-md text-sm leading-7 text-white/78 sm:text-base">
-            Add product images and they will appear here automatically.
-          </p>
-        </div>
+      <div className="relative h-[320px] w-full overflow-hidden bg-[linear-gradient(145deg,#1d3558,#2b5c8b,#d8b15b)] shadow-[0_24px_60px_rgba(25,48,78,0.16)] sm:h-[420px] lg:h-[620px]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_30%)]" />
+          <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
+            <p className="mb-4 text-[0.72rem] font-semibold uppercase tracking-[0.42em] text-white/70">Coming Soon</p>
+            <h3 className="font-display text-4xl font-semibold sm:text-5xl">Featured Bracelets</h3>
+            <p className="mt-3 max-w-md text-sm leading-7 text-white/78 sm:text-base">
+              Add product images and they will appear here automatically.
+            </p>
+          </div>
       </div>
     );
   }
 
   return (
-    <div className="relative h-[420px] w-full overflow-hidden rounded-[34px] bg-slate-950 shadow-[0_28px_70px_rgba(25,48,78,0.22)] sm:h-[500px] lg:h-[620px]">
-      <div className="relative w-full h-full">
+    <div className="relative h-[320px] w-full overflow-hidden bg-slate-950 shadow-[0_24px_60px_rgba(25,48,78,0.16)] sm:h-[420px] lg:h-[620px]">
+      <div className="relative h-full w-full">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
@@ -94,22 +94,16 @@ export default function HeroCarousel({ products, loading }: HeroCarouselProps) {
                 target.style.display = 'none';
               }}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,19,35,0.12),rgba(9,19,35,0.28)_35%,rgba(9,19,35,0.78)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,19,35,0.1),rgba(9,19,35,0.22)_38%,rgba(9,19,35,0.56)_100%)]" />
           </div>
         ))}
       </div>
 
       <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-7">
-        <div className="max-w-lg rounded-[30px] bg-white/14 p-5 shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:p-6">
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-white/65">
-            Signature Piece
-          </p>
-          <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
+        <div className="max-w-2xl rounded-[24px] bg-white/12 px-5 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-6 sm:py-5">
+          <h3 className="font-display text-2xl font-semibold leading-tight text-white sm:text-4xl">
             {slides[activeSlide]?.title}
           </h3>
-          <p className="mt-3 max-w-md text-sm leading-7 text-white/80 sm:text-base">
-            {slides[activeSlide]?.description}
-          </p>
         </div>
       </div>
 

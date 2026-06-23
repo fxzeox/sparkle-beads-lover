@@ -29,12 +29,12 @@ export default function ProductCard({ product }: ProductCardProps) {
   }, [showModal]);
 
   return (
-    <div className="group relative mx-auto flex w-full max-w-[320px] flex-col overflow-hidden rounded-[30px] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,243,236,0.95))] shadow-[0_20px_48px_rgba(28,54,86,0.12)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_26px_58px_rgba(28,54,86,0.18)]">
+    <div className="group relative mx-auto flex w-full max-w-none flex-col overflow-hidden rounded-[26px] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,243,236,0.95))] shadow-[0_18px_40px_rgba(28,54,86,0.11)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_54px_rgba(28,54,86,0.16)] sm:max-w-[320px] sm:rounded-[30px]">
       <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-[#d8b15b]/10 blur-3xl" />
       <div className="pointer-events-none absolute -left-4 bottom-8 h-20 w-20 rounded-full bg-[#6ca6dd]/12 blur-3xl" />
 
       <div
-        className="relative h-44 w-full cursor-zoom-in overflow-hidden bg-slate-100 sm:h-52"
+        className="relative h-36 w-full cursor-zoom-in overflow-hidden bg-slate-100 min-[430px]:h-40 sm:h-52"
         onClick={() => {
           setModalImageLoaded(false);
           setShowModal(true);
@@ -56,17 +56,17 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(15,26,45,0.18)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
-      <div className="flex flex-col gap-2 p-4 sm:gap-2.5 sm:p-5">
+      <div className="flex flex-col gap-2 p-3 sm:gap-2.5 sm:p-5">
         <div>
-          <h3 className="font-display text-[1.28rem] font-semibold leading-[1.2] break-words text-slate-900 transition-colors group-hover:text-[#1f4f88] sm:text-[1.5rem]">
+          <h3 className="font-display text-[1.02rem] font-semibold leading-[1.18] break-words text-slate-900 transition-colors group-hover:text-[#1f4f88] min-[430px]:text-[1.14rem] sm:text-[1.5rem]">
             {product.name}
           </h3>
         </div>
 
         <div className="flex items-end justify-between gap-2 pt-0.5">
           <div>
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-slate-500">Price</p>
-            <span className="mt-1 block font-display text-[1.85rem] font-semibold text-[#c4953d] sm:text-[2rem]">
+            <p className="text-[0.58rem] font-semibold uppercase tracking-[0.26em] text-slate-500 min-[430px]:text-[0.64rem]">Price</p>
+            <span className="mt-0.5 block font-display text-[1.38rem] font-semibold text-[#c4953d] min-[430px]:text-[1.55rem] sm:text-[2rem]">
               Rs {product.price.toLocaleString()}
             </span>
           </div>
